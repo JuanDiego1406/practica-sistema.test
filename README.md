@@ -32,9 +32,13 @@ Before you begin, ensure that you have the following installed:
 - [Vagrant](https://www.vagrantup.com/)
 - [VirtualBox](https://www.virtualbox.org/)
 
+![Descripción de la imagen](file/images/1.png)
+
 ## Network and Equipment Configuration
+![Descripción de la imagen](file/images/2.png)
 
 The network is configured to use the IP range `192.168.57.0/24`, and the DNS setup involves several virtual machines. Below is the list of devices:
+
 
 | **Host**       | **FQDN**                 | **IP Address**      |
 |----------------|--------------------------|---------------------|
@@ -43,8 +47,12 @@ The network is configured to use the IP range `192.168.57.0/24`, and the DNS set
 | Debian (Text)  | `tierra.sistema.test`     | `192.168.57.103`    |
 | Windows Server | `marte.sistema.test`      | `192.168.57.104`    |
 
+![Descripción de la imagen](file/images/8.png)
+
+
 ## DNS Server Configuration
 
+![Descripción de la imagen](file/images/3.png)
 ### Master Server Setup
 
 The master DNS server (`tierra.sistema.test`) holds authority over both the direct (`sistema.test`) and reverse (`57.168.192.in-addr.arpa`) zones. The DNS daemon is configured to:
@@ -54,9 +62,14 @@ The master DNS server (`tierra.sistema.test`) holds authority over both the dire
 
 The `named.conf.local` file contains the zone declarations for `sistema.test` and its reverse zone. The TTL for negative caching has been set to **two hours** (7200 seconds) to control the time-to-live for failed lookups.
 
+![Descripción de la imagen](file/images/7_1.png)
+
 ### Slave Server Setup
 
 The slave DNS server (`venus.sistema.test`) acts as a backup for the master. It retrieves the zone information from `tierra.sistema.test` using **AXFR** transfers. The configuration also enforces recursive query control and implements DNSSEC validation.
+
+![Descripción de la imagen](file/images/7_2.png)
+
 
 ### DNSSEC Validation
 
@@ -78,6 +91,9 @@ The ACL configuration allows safe DNS querying within the trusted network while 
 
 Any queries for zones that the local DNS server is not authoritative for are forwarded to the **OpenDNS server** (`208.67.222.222`). This ensures that external DNS queries are resolved reliably and quickly.
 
+![Descripción de la imagen](file/images/4.png)
+
+
 ### Alias Configuration
 
 The following aliases are defined in the zone file:
@@ -86,6 +102,10 @@ The following aliases are defined in the zone file:
 - `mail.sistema.test` → `marte.sistema.test`
 
 `marte.sistema.test` is configured as the **MX** (Mail Exchanger) for the `sistema.test` domain.
+
+![Descripción de la imagen](file/images/5.png)
+
+![Descripción de la imagen](file/images/6.png)
 
 ## Zone Transfer and Verification
 
@@ -120,3 +140,5 @@ dig MX sistema.test
 ```
 
 Logs on both the master and slave servers can also be inspected to ensure proper functionality.
+
+![Descripción de la imagen](file/images/8.png)
