@@ -1,0 +1,25 @@
+$TTL	86400
+@	IN	SOA	tierra.sistema.test. root.sistema.test. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			  86400 )	; Negative Cache TTL
+;
+;The Names of the servers
+@	IN	NS	tierra.sistema.test.
+@	IN	NS	venus.sistema.test.
+
+;The Mail server
+@	IN	MX	10 marte.sistema.test.
+
+;The alias 
+ns1 IN CNAME tierra.sistema.test.
+ns2 IN CNAME venus.sistema.test.
+mail IN CNAME marte.sistema.test.
+
+;The server directions
+mercurio.sistema.test. IN A 192.168.57.101
+venus.sistema.test. IN A 192.168.57.102
+tierra.sistema.test. IN A 192.168.57.103
+marte.sistema.test. IN A 192.168.57.104
