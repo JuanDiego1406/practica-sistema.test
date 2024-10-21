@@ -36,7 +36,6 @@ Before you begin, ensure that you have the following installed:
 
 The network is configured to use the IP range `192.168.57.0/24`, and the DNS setup involves several virtual machines. Below is the list of devices:
 
-(image/1.png)
 | **Host**       | **FQDN**                 | **IP Address**      |
 |----------------|--------------------------|---------------------|
 | Linux GUI      | `mercurio.sistema.test`   | `192.168.57.101`    |
