@@ -4,14 +4,10 @@ acl "trusted"{
 };
 options {
 	directory "/var/cache/bind";
-
 	allow-query { trusted; };
-
 	max-ncache-ttl 7200;
-
 	forwarders { 208.67.222.222;};
 	forward only;
-
 	listen-on port 53 { 
 		192.168.57.103; 
 		192.168.57.102; 
